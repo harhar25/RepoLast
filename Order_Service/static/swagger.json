@@ -1,0 +1,105 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Microservices Order API",
+      "description": "API for managing orders in a microservices architecture.",
+      "version": "1.0.0"
+    },
+    "host": "localhost:5002",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+      "/orders": {
+        "get": {
+          "summary": "Get all orders",
+          "description": "Retrieve a list of all orders.",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/definitions/Order" }
+              }
+            }
+          }
+        }
+      },
+      "/orders/{order_id}": {
+        "get": {
+          "summary": "Get an order by ID",
+          "parameters": [{
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": { "$ref": "#/definitions/Order" }
+            },
+            "404": {
+              "description": "Order not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update an order",
+          "parameters": [{
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }, {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Order" }
+          }],
+          "responses": {
+            "200": { "description": "Order updated" },
+            "404": { "description": "Order not found" }
+          }
+        },
+        "delete": {
+          "summary": "Delete an order",
+          "parameters": [{
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }],
+          "responses": {
+            "200": { "description": "Order deleted" },
+            "404": { "description": "Order not found" }
+          }
+        }
+      },
+      "/order": {
+        "post": {
+          "summary": "Create an order",
+          "parameters": [{
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Order" }
+          }],
+          "responses": {
+            "201": { "description": "Order created" },
+            "404": { "description": "User not found" }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "user_id": { "type": "integer" },
+          "product": { "type": "string" }
+        }
+      }
+    }
+  }
+  

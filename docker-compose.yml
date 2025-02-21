@@ -1,0 +1,18 @@
+
+
+services:
+  user_service:
+    build: ./User_Service
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./User_Service/static:/app/static  # ✅ Mount static/ to ensure Swagger works
+
+  order_service:
+    build: ./Order_Service
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./Order_Service/static:/app/static  # ✅ Mount static/ to ensure Swagger works
+    depends_on:
+      - user_service

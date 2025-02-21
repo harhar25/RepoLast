@@ -1,0 +1,5 @@
+Flask
+Flask-SQLAlchemy
+requests
+flask-swagger-ui==4.11.1
+flask-cors==5.0.0
